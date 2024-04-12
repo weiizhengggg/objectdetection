@@ -75,9 +75,12 @@ double intersectArea(Point a,Point b,Point c,Point d){
     Point o(0,0);
     int s1=sig(cross(o,a,b));
     int s2=sig(cross(o,c,d));
-    if(s1==0||s2==0)return 0.0;//退化，面积为0
-    if(s1==-1) swap(a,b);
-    if(s2==-1) swap(c,d);
+    if(s1==0||s2==0)
+        return 0.0;//退化，面积为0
+    if(s1==-1) 
+        swap(a,b);
+    if(s2==-1) 
+        swap(c,d);
     Point p[10]={o,a,b};
     int n=3;
     Point pp[maxn];
@@ -85,7 +88,9 @@ double intersectArea(Point a,Point b,Point c,Point d){
     polygon_cut(p,n,c,d, pp);
     polygon_cut(p,n,d,o, pp);
     double res=fabs(area(p,n));
-    if(s1*s2==-1) res=-res;return res;
+    if(s1*s2==-1) 
+        res=-res;
+    return res;
 }
 //求两多边形的交面积
 double intersectArea(Point*ps1,int n1,Point*ps2,int n2){
