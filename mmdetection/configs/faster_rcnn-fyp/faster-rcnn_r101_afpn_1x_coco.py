@@ -125,7 +125,7 @@ model = dict(
 # dataset settings
 dataset_type = 'CocoDataset'
 classes = ('airplane', 'ship', 'storage tank', 'baseball diamond', 'tennis court', 'basketball court', 'ground track field', 'harbor', 'bridge', 'vehicle')
-data_root = 'C:/Users/Tey Wei Zheng/Desktop/FYP2/objectdetection/data/NWPU_VHR-10/'
+data_root = '/kaggle/input/nwpu-vhr-10/NWPU_VHR-10/'
 
 backend_args = None
 
