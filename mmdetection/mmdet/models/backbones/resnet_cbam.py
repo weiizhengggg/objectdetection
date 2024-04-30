@@ -450,6 +450,11 @@ class ResNet_CBAM(BaseModule):
                           'please use "init_cfg" instead')
             self.init_cfg = dict(type='Pretrained', checkpoint=pretrained)
         elif pretrained is None:
+            if init_cfg is not None:
+                if init_cfg.get('type') == 'Pretrained':
+                    pretrained_checkpoint = init_cfg.get('checkpoint')
+                    self.load_pretrained_weights(pretrained_checkpoint)
+
             if init_cfg is None:
                 self.init_cfg = [
                     dict(type='Kaiming', layer='Conv2d'),
@@ -501,17 +506,6 @@ class ResNet_CBAM(BaseModule):
         self.block, stage_blocks = self.arch_settings[depth]
         self.stage_blocks = stage_blocks[:num_stages]
         self.inplanes = stem_channels
-        self.pretrained = pretrained
-        if pretrained:
-            resnet_name = f'resnet{depth}'
-            if resnet_name not in model_urls:
-                raise KeyError(f"No pretrained model available for ResNet-{depth}")
-            print(f"Loading pretrained weights for {resnet_name}...")
-            pretrained_dict = model_zoo.load_url(model_urls[resnet_name])
-            now_state_dict = super(ResNet_CBAM, self).state_dict()
-            pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
-            now_state_dict.update(pretrained_dict)
-            super(ResNet_CBAM, self).load_state_dict(now_state_dict)
 
         self._make_stem_layer(in_channels, stem_channels)
 
@@ -549,6 +543,13 @@ class ResNet_CBAM(BaseModule):
 
         self.feat_dim = self.block.expansion * base_channels * 2**(
             len(self.stage_blocks) - 1)
+    
+    def load_pretrained_weights(self, pretrained_checkpoint):
+        pretrained_dict = model_zoo.load_url(pretrained_checkpoint)
+        now_state_dict = super(ResNet_CBAM, self).state_dict()
+        pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
+        now_state_dict.update(pretrained_dict)
+        super(ResNet_CBAM, self).load_state_dict(now_state_dict)
 
     def make_stage_plugins(self, plugins, stage_idx):
         """Make plugins for ResNet ``stage_idx`` th stage.

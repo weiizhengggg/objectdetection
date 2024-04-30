@@ -20,7 +20,7 @@ model = dict(
         norm_cfg=dict(type='BN', requires_grad=True),
         norm_eval=True,
         style='pytorch',
-        pretrained = True),
+        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet101')),
 
     neck=dict(
         type='AFPN',
