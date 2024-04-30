@@ -2,7 +2,7 @@ import warnings
 import math
 import torch
 import torch.nn as nn
-import torch.utils.model_zoo as model_zoo
+
 import torch.utils.checkpoint as cp
 from mmcv.cnn import build_conv_layer, build_norm_layer, build_plugin_layer
 from mmengine.model import BaseModule
@@ -545,7 +545,7 @@ class ResNet_CBAM(BaseModule):
             len(self.stage_blocks) - 1)
     
     def load_pretrained_weights(self, pretrained_checkpoint):
-        pretrained_dict = model_zoo.load_url(pretrained_checkpoint)
+        pretrained_dict = torch.load(pretrained_checkpoint)['state_dict']
         now_state_dict = super(ResNet_CBAM, self).state_dict()
         pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
         now_state_dict.update(pretrained_dict)
