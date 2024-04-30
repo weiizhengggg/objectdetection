@@ -2,6 +2,7 @@ import warnings
 import math
 import torch
 import torch.nn as nn
+import torch.utils.model_zoo as model_zoo
 import torch.utils.checkpoint as cp
 from mmcv.cnn import build_conv_layer, build_norm_layer, build_plugin_layer
 from mmengine.model import BaseModule
@@ -9,6 +10,14 @@ from torch.nn.modules.batchnorm import _BatchNorm
 
 from mmdet.registry import MODELS
 from ..layers import ResLayer
+
+model_urls = {
+    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+    'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+    'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+}
 
 class ChannelAttention(nn.Module):
     def __init__(self, in_planes, ratio=16):
@@ -492,6 +501,17 @@ class ResNet_CBAM(BaseModule):
         self.block, stage_blocks = self.arch_settings[depth]
         self.stage_blocks = stage_blocks[:num_stages]
         self.inplanes = stem_channels
+        self.pretrained = pretrained
+        if pretrained:
+            resnet_name = f'resnet{depth}'
+            if resnet_name not in model_urls:
+                raise KeyError(f"No pretrained model available for ResNet-{depth}")
+            print(f"Loading pretrained weights for {resnet_name}...")
+            pretrained_dict = model_zoo.load_url(model_urls[resnet_name])
+            now_state_dict = super(ResNet_CBAM, self).state_dict()
+            pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
+            now_state_dict.update(pretrained_dict)
+            super(ResNet_CBAM, self).load_state_dict(now_state_dict)
 
         self._make_stem_layer(in_channels, stem_channels)
 
