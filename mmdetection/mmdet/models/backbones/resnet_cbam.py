@@ -496,7 +496,7 @@ class ResNet_CBAM(BaseModule):
         if pretrained is not None:
             pretrained_dict = torch.load(pretrained)
             now_state_dict = self.state_dict()
-            pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
+            pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict and k not in ['fc.weight', 'fc.bias']} 
             now_state_dict.update(pretrained_dict)
             self.load_state_dict(now_state_dict)
 
