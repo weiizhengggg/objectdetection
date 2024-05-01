@@ -1,5 +1,4 @@
 import warnings
-import math
 import torch
 import torch.nn as nn
 
@@ -504,10 +503,10 @@ class ResNet_CBAM(BaseModule):
         self.pretrained = pretrained
         if pretrained is not None:
             pretrained_dict = torch.load(pretrained)['state_dict']
-            now_state_dict = super(ResNet_CBAM, self).state_dict()
+            now_state_dict = self.state_dict()
             pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
             now_state_dict.update(pretrained_dict)
-            super(ResNet_CBAM, self).load_state_dict(now_state_dict)
+            self.load_state_dict(now_state_dict)
 
         self._make_stem_layer(in_channels, stem_channels)
 
