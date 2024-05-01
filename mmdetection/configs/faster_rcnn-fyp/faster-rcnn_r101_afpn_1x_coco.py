@@ -20,7 +20,7 @@ model = dict(
         norm_cfg=dict(type='BN', requires_grad=True),
         norm_eval=True,
         style='pytorch',
-        pretrained = '/kaggle/input/pretrained-resnet-101/resnet101-5d3b4d8f.pth'),
+        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet101')),
 
     neck=dict(
         type='AFPN',

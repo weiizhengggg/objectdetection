@@ -492,14 +492,7 @@ class ResNet_CBAM(BaseModule):
         self.block, stage_blocks = self.arch_settings[depth]
         self.stage_blocks = stage_blocks[:num_stages]
         self.inplanes = stem_channels
-        self.pretrained = pretrained
-        if pretrained is not None:
-            pretrained_dict = torch.load(pretrained)
-            now_state_dict = self.state_dict()
-            pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict and k not in ['fc.weight', 'fc.bias']} 
-            now_state_dict.update(pretrained_dict)
-            self.load_state_dict(now_state_dict)
-
+    
         self._make_stem_layer(in_channels, stem_channels)
 
         self.res_layers = []
