@@ -494,7 +494,7 @@ class ResNet_CBAM(BaseModule):
         self.inplanes = stem_channels
         self.pretrained = pretrained
         if pretrained is not None:
-            pretrained_dict = torch.load(pretrained)['state_dict']
+            pretrained_dict = torch.load(pretrained)
             now_state_dict = self.state_dict()
             pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in now_state_dict} 
             now_state_dict.update(pretrained_dict)
