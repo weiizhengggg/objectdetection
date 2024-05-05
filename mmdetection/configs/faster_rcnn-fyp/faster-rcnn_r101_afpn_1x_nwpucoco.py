@@ -158,7 +158,7 @@ train_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         metainfo=dict(classes=classes),
-        ann_file='nwpu_coco/train.json',
+        ann_file=data_root +'nwpu_coco/train.json',
         data_prefix=dict(img='positive_image_set/'),
         filter_cfg=dict(filter_empty_gt=True, min_size=32),
         pipeline=train_pipeline,
@@ -174,22 +174,42 @@ val_dataloader = dict(
         type=dataset_type,
         metainfo=dict(classes=classes),
         data_root=data_root,
-        ann_file='nwpu_coco/test.json',
+        ann_file=data_root +'nwpu_coco/val.json',
         data_prefix=dict(img='positive_image_set/'),
         test_mode=True,
         pipeline=test_pipeline,
         backend_args=backend_args))
 
-test_dataloader = val_dataloader
+test_dataloader = dict(
+    batch_size=1,
+    num_workers=2,
+    persistent_workers=True,
+    drop_last=False,
+    sampler=dict(type='DefaultSampler', shuffle=False),
+    dataset=dict(
+        type=dataset_type,
+        metainfo=dict(classes=classes),
+        data_root=data_root,
+        ann_file=data_root +'nwpu_coco/test.json',
+        data_prefix=dict(img='positive_image_set/'),
+        test_mode=True,
+        pipeline=test_pipeline,
+        backend_args=backend_args))
 
 val_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'nwpu_coco/test.json',
+    ann_file=data_root + 'nwpu_coco/val.json',
     metric='bbox',
     format_only=False,
     backend_args=backend_args)
 
-test_evaluator = val_evaluator
+test_evaluator = dict(
+    type='CocoMetric',
+    metric='bbox',
+    format_only=True,
+    ann_file=data_root +'nwpu_coco/test.json',
+    outfile_prefix='./work_dirs/nwpu_coco_detection/test',
+    backend_args=backend_args)
 
 
 # training schedule for 1x
