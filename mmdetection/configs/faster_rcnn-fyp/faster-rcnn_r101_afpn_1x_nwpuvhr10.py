@@ -125,7 +125,7 @@ model = dict(
 # dataset settings
 dataset_type = 'VOCDataset'
 classes = ('airplane', 'ship', 'storage tank', 'baseball diamond', 'tennis court', 'basketball court', 'ground track field', 'harbor', 'bridge', 'vehicle')
-data_root = '/kaggle/input/nwpu-vhr-10-in-voc2007/NWPU_VHR-10_VOC/'
+data_root = '/kaggle/input/nwpu-vhr-10-in-voc2007/'
 
 backend_args = None
 
