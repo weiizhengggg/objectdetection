@@ -167,6 +167,7 @@ train_dataloader = dict(
                 dict(
                     type=dataset_type,
                     data_root=data_root,
+                    metainfo=dict(classes=classes),
                     ann_file='NWPU_VHR-10_VOC/ImageSets/Main/train.txt',
                     data_prefix=dict(sub_data_root='NWPU_VHR-10_VOC/'),
                     filter_cfg=dict(
@@ -183,6 +184,7 @@ val_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type=dataset_type,
+        metainfo=dict(classes=classes),
         data_root=data_root,
         ann_file='NWPU_VHR-10_VOC/ImageSets/Main/val.txt',
         data_prefix=dict(sub_data_root='NWPU_VHR-10_VOC/'),
@@ -198,6 +200,7 @@ test_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=False),
     dataset=dict(
         type=dataset_type,
+        metainfo=dict(classes=classes),
         data_root=data_root,
         ann_file='NWPU_VHR-10_VOC/ImageSets/Main/test.txt',
         data_prefix=dict(sub_data_root='NWPU_VHR-10_VOC/'),
