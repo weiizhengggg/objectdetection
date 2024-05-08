@@ -12,7 +12,7 @@ model = dict(
         pad_size_divisor=32),
 
     backbone=dict(
-        type='ResNet_CBAM',
+        type='ResNet',
         depth=101,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
@@ -22,10 +22,16 @@ model = dict(
         style='pytorch',
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet101')),
 
-    neck=dict(
-        type='AFPN',
+    # neck=dict(
+    #     type='AFPN',
+    #     in_channels=[256, 512, 1024, 2048],
+    #     out_channels=256),
+    
+        neck=dict(
+        type='FPN',
         in_channels=[256, 512, 1024, 2048],
-        out_channels=256),
+        out_channels=256,
+        num_outs=5),
 
     rpn_head=dict(
         type='RPNHead',
