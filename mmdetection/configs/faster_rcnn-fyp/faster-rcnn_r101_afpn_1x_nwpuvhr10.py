@@ -12,7 +12,7 @@ model = dict(
         pad_size_divisor=32),
 
     backbone=dict(
-        type='ResNet_CBAM',
+        type='ResNet',
         depth=101,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
