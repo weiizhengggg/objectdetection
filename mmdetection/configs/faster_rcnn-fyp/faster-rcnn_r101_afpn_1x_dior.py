@@ -122,7 +122,7 @@ model = dict(
 
 # dataset settings
 dataset_type = 'DIORDataset'
-data_root = '/kaggle/input/dior-dataset/DIOR/'
+data_root = '/kaggle/input/dior-dataset/'
 
 backend_args = None
 
