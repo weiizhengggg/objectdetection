@@ -165,7 +165,7 @@ train_dataloader = dict(
                     type=dataset_type,
                     data_root=data_root,
                     ann_file='ImageSets/Main/train.txt',
-                    data_prefix=dict(img_path='JPEGImage-trainval'),
+                    data_prefix=dict(img_path='JPEGImages-trainval'),
                     filter_cfg=dict(filter_empty_gt=True),
                     pipeline=train_pipeline)
             ])))
@@ -180,7 +180,7 @@ val_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         ann_file='ImageSets/Main/val.txt',
-        data_prefix=dict(img_path='JPEGImage-trainval'),
+        data_prefix=dict(img_path='JPEGImages-trainval'),
         test_mode=True,
         pipeline=test_pipeline))
 
@@ -194,7 +194,7 @@ test_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         ann_file='ImageSets/Main/test.txt',
-        data_prefix=dict(img_path='JPEGImage-test'),
+        data_prefix=dict(img_path='JPEGImages-test'),
         test_mode=True,
         pipeline=test_pipeline))
 
