@@ -39,7 +39,7 @@ class DIORDataset(BaseDataset):
     }
 
     def __init__(self,
-                 ann_subdir: str = 'Annotations/Horizontal_Bounding_Boxes/',
+                 ann_subdir: str = 'DIOR/Annotations/Horizontal_Bounding_Boxes/',
                  file_client_args: dict = dict(backend='disk'),
                  ann_type: str = 'hbb',
                  **kwargs) -> None:
