@@ -27,7 +27,7 @@ class DIORDataset(BaseDataset):
 
     METAINFO = {
         'classes': ('airplane', 'airport', 'baseballfield', 'basketballcourt', 'bridge', 'chimney', 'dam',
-                    'expressway-Service-area', 'expressway-toll-station', 'golffield', 'groundtrackfield', 'harbor', 
+                    'expressway-service-area', 'expressway-toll-station', 'golffield', 'groundtrackfield', 'harbor', 
                     'overpass', 'ship', 'stadium', 'storagetank', 'tenniscourt', 'trainstation', 'vehicle', 'windmill'),
         # palette is a list of color tuples, which is used for visualization.
         'palette': [(220, 20, 60), (119, 11, 32), (0, 0, 142), (0, 0, 230),
