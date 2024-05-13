@@ -122,7 +122,7 @@ model = dict(
 
 # dataset settings
 dataset_type = 'DIORDataset'
-data_root = '/kaggle/input/dior-dataset/DIOR/'
+data_root = '/kaggle/input/dior-dataset/'
 
 backend_args = None
 
@@ -167,8 +167,7 @@ train_dataloader = dict(
                     ann_file='DIOR/ImageSets/Main/train.txt',
                     data_prefix=dict(img_path='JPEGImage-trainval'),
                     filter_cfg=dict(filter_empty_gt=True),
-                    pipeline=train_pipeline,
-                    backend_args=backend_args)
+                    pipeline=train_pipeline)
             ])))
 
 val_dataloader = dict(
@@ -183,8 +182,7 @@ val_dataloader = dict(
         ann_file='DIOR/ImageSets/Main/val.txt',
         data_prefix=dict(img_path='JPEGImage-trainval'),
         test_mode=True,
-        pipeline=test_pipeline,
-        backend_args=backend_args))
+        pipeline=test_pipeline))
 
 test_dataloader = dict(
     batch_size=1,
@@ -198,8 +196,7 @@ test_dataloader = dict(
         ann_file='DIOR/ImageSets/Main/test.txt',
         data_prefix=dict(img_path='JPEGImage-test'),
         test_mode=True,
-        pipeline=test_pipeline,
-        backend_args=backend_args))
+        pipeline=test_pipeline))
 
 val_evaluator = dict(type='VOCMetric', metric='mAP', eval_mode='11points', collect_device='gpu')
 test_evaluator = val_evaluator

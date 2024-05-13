@@ -158,7 +158,7 @@ train_dataloader = dict(
         type=dataset_type,
         data_root=data_root,
         metainfo=dict(classes=classes),
-        ann_file=data_root +'nwpu_coco/train.json',
+        ann_file='nwpu_coco/train.json',
         data_prefix=dict(img='positive_image_set/'),
         filter_cfg=dict(filter_empty_gt=True, min_size=32),
         pipeline=train_pipeline,
@@ -174,7 +174,7 @@ val_dataloader = dict(
         type=dataset_type,
         metainfo=dict(classes=classes),
         data_root=data_root,
-        ann_file=data_root +'nwpu_coco/val.json',
+        ann_file='nwpu_coco/val.json',
         data_prefix=dict(img='positive_image_set/'),
         test_mode=True,
         pipeline=test_pipeline,
@@ -190,7 +190,7 @@ test_dataloader = dict(
         type=dataset_type,
         metainfo=dict(classes=classes),
         data_root=data_root,
-        ann_file=data_root +'nwpu_coco/test.json',
+        ann_file='nwpu_coco/test.json',
         data_prefix=dict(img='positive_image_set/'),
         test_mode=True,
         pipeline=test_pipeline,
@@ -267,4 +267,4 @@ log_processor = dict(type='LogProcessor', window_size=50, by_epoch=True)
 
 log_level = 'INFO'
 load_from = None
-resume = True
+resume = None
