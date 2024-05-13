@@ -214,7 +214,7 @@ test_dataloader = dict(
         pipeline=test_pipeline,
         backend_args=backend_args))
 
-val_evaluator = dict(type='VOCMetric', metric='mAP', eval_mode='11points')
+val_evaluator = dict(type='VOCMetric', metric='mAP', eval_mode='11points', collect_device='gpu')
 test_evaluator = val_evaluator
 
 
