@@ -122,7 +122,7 @@ model = dict(
 
 # dataset settings
 dataset_type = 'DIORDataset'
-data_root = '/kaggle/input/dior-dataset/'
+data_root = '/kaggle/input/dior-dataset/DIOR/'
 
 backend_args = None
 
@@ -164,7 +164,7 @@ train_dataloader = dict(
                 dict(
                     type=dataset_type,
                     data_root=data_root,
-                    ann_file='DIOR/ImageSets/Main/train.txt',
+                    ann_file='ImageSets/Main/train.txt',
                     data_prefix=dict(img_path='JPEGImage-trainval'),
                     filter_cfg=dict(filter_empty_gt=True),
                     pipeline=train_pipeline)
@@ -179,7 +179,7 @@ val_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file='DIOR/ImageSets/Main/val.txt',
+        ann_file='ImageSets/Main/val.txt',
         data_prefix=dict(img_path='JPEGImage-trainval'),
         test_mode=True,
         pipeline=test_pipeline))
@@ -193,7 +193,7 @@ test_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
-        ann_file='DIOR/ImageSets/Main/test.txt',
+        ann_file='ImageSets/Main/test.txt',
         data_prefix=dict(img_path='JPEGImage-test'),
         test_mode=True,
         pipeline=test_pipeline))
