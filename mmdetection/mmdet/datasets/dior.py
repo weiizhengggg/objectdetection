@@ -17,7 +17,7 @@ class DIORDataset(BaseDataset):
 
     Args:
         ann_subdir (str): Subdir where annotations are.
-            Defaults to 'Annotations/Horizontal Bounding Boxes/'.
+            Defaults to 'Annotations/Horizontal_Bounding_Boxes/'.
         file_client_args (dict): Arguments to instantiate a FileClient.
             See :class:`mmengine.fileio.FileClient` for details.
             Defaults to ``dict(backend='disk')``.
@@ -39,7 +39,7 @@ class DIORDataset(BaseDataset):
     }
 
     def __init__(self,
-                 ann_subdir: str = 'Annotations/Horizontal Bounding Boxes/',
+                 ann_subdir: str = 'Annotations/Horizontal_Bounding_Boxes/',
                  file_client_args: dict = dict(backend='disk'),
                  ann_type: str = 'hbb',
                  **kwargs) -> None:
