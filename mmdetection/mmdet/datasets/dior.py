@@ -152,17 +152,15 @@ class DIORDataset(BaseDataset):
                     float(bnd_box.find('xmin').text),
                     float(bnd_box.find('ymin').text),
                     float(bnd_box.find('xmax').text),
-                    float(bnd_box.find('ymin').text),
-                    float(bnd_box.find('xmax').text),
                     float(bnd_box.find('ymax').text),
-                    float(bnd_box.find('xmin').text),
-                    float(bnd_box.find('ymax').text)
                 ]).astype(np.float32)
 
             ignore = False
             if self.bbox_min_size is not None:
                 assert not self.test_mode
-                if width < self.bbox_min_size or height < self.bbox_min_size:
+                w = polygon[2] - polygon[0]
+                h = polygon[3] - polygon[1]
+                if w < self.bbox_min_size or h < self.bbox_min_size:
                     ignore = True
             if ignore:
                 instance['ignore_flag'] = 1
