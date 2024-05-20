@@ -155,8 +155,8 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=2,
-    num_workers=2,
+    batch_size=4,
+    num_workers=8,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
     batch_sampler=dict(type='AspectRatioBatchSampler'),
@@ -237,8 +237,11 @@ param_scheduler = [
 ]
 
 # optimizer
+# optim_wrapper = dict(
+#     type='OptimWrapper',
+#     optimizer=dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001))
 optim_wrapper = dict(
-    type='OptimWrapper',
+    type='AmpOptimWrapper',
     optimizer=dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001))
 
 # Default setting for scaling LR automatically
@@ -273,4 +276,4 @@ log_processor = dict(type='LogProcessor', window_size=50, by_epoch=True)
 
 log_level = 'INFO'
 load_from = None
-resume = None
+resume = True
