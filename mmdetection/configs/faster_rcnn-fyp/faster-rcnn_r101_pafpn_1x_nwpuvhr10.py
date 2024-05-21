@@ -21,17 +21,12 @@ model = dict(
         norm_eval=True,
         style='pytorch',
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')),
-
-        neck=dict(
-            type='AFPN',
-            in_channels=[256, 512, 1024, 2048],
-            out_channels=256),
     
-        # neck=dict(
-        # type='PAFPN',
-        # in_channels=[256, 512, 1024, 2048],
-        # out_channels=256,
-        # num_outs=5),
+    neck=dict(
+        type='PAFPN',
+        in_channels=[256, 512, 1024, 2048],
+        out_channels=256,
+        num_outs=5),
 
     rpn_head=dict(
         type='RPNHead',
@@ -237,12 +232,10 @@ param_scheduler = [
 ]
 
 # optimizer
-# optim_wrapper = dict(
-#     type='OptimWrapper',
-#     optimizer=dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001))
 optim_wrapper = dict(
-    type='AmpOptimWrapper',
+    type='OptimWrapper',
     optimizer=dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001))
+
 
 # Default setting for scaling LR automatically
 #   - `enable` means enable scaling LR automatically
