@@ -58,6 +58,12 @@ class BaseBoxes(metaclass=ABCMeta):
                  dtype: Optional[torch.dtype] = None,
                  device: Optional[DeviceType] = None,
                  clone: bool = True) -> None:
+        
+        # Check if data is a list of numpy arrays and convert it to a single numpy array 
+        # To solve the warning of : Creating a tensor from a list of numpy.ndarrays is extremely slow. 
+        if isinstance(data, list) and all(isinstance(item, np.ndarray) for item in data):
+            data = np.array(data)
+
         if isinstance(data, (np.ndarray, Tensor, Sequence)):
             data = torch.as_tensor(data)
         else:
