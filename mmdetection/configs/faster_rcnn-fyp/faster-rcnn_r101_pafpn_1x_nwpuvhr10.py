@@ -21,7 +21,7 @@ model = dict(
         norm_eval=True,
         style='pytorch',
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet101'),
-        dcn=dict(type='DCN', deform_groups=1, fallback_on_stride=False),
+        dcn=dict(type='DCNv2', deform_groups=1, fallback_on_stride=False),
         stage_with_dcn=(False, True, True, True)),
     
     neck=dict(
